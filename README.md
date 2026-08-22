@@ -7,7 +7,8 @@ Analyses include overlap between differentially expressed and differentially spl
 - Differential Gene Expression Preparation
   1. Quality Control (FastQC, TrimGalore)
   2. Alignment (SubJunc)
-  3. Read Counting (featureCounts)
+  3. Sorting and Indexing (samtools)
+  4. Read Counting (featureCounts)
 
 
 ## Differential Gene Expression Preparation
@@ -46,5 +47,23 @@ Array File: Two columns, first column with F and second column with R. *SubJunc_
 
 `sbatch SubJunc_align_array.slurm`
 
+---
 
+### Sorting and Indexing
+
+Many downstream commands require alignments to be sorted and indexed. Further, we convert large .sam files into smaller .bam files.
+
+Array File: One column of aligned .sam files. *SortDex_array.txt*
+
+`sbatch SortDex_array.slurm`
+
+---
+
+### Read Counting
+
+Now we can get read counts for each gene (must be reads overlapping exons). Rather than an array, we will run a single job that will return a table with all aligned samples as columns.
+
+`sbatch featureCounts.slurm`
+
+---
 
