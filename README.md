@@ -93,9 +93,8 @@ We need to list the input alignments in a single-line, comma-separated list file
 and one text file:   
 &emsp; &emsp; "adult_female_Brain.txt" ("AFBrain_1.bam, AFBrain_2.bam, ..., AFBrain_6.bam")   
 
+`sbatch rMATS.slurm`
 
-Fin temp.
-
-
+Note: you will likely have to trim the reads down to an equal length. In such cases, it may even be easier to run rMATs on trimmed reads rather than alignments. Both options are fine, but you will need to specify (and test) different aligners in rMATs. Also, keep track of which variable is "-b1" and which is "-b2" as that will decide which variable has a positive deltaPSI and which a negative deltaPSI (like logFC in DEG analyses).
 
 
