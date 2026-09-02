@@ -1,14 +1,28 @@
 # Differential_Gene_Expression_and_Splicing Repository
 *Background*  
-Differential gene expression and differential gene splicing are characterized by contrasting three age groups (neonate, maturing, and adult), three tissues (liver, brain, muscle), and two sexes.
-Analyses include overlap between differentially expressed and differentially spliced genes, tissue-specificity of expression of age-/sex-biased genes, and population-level genetic diversity.
+Differential gene expression and differential gene splicing are characterized by contrasting three age groups (neonate, maturing, and adult), three tissues (liver, brain, muscle), and two sexes. Analyses include overlap between differentially expressed and differentially spliced genes, tissue-specificity of expression of age-/sex-biased genes, and population-level genetic diversity (RNAseq comes from one population while WGS for PopGen analysis come from another). This workflow is intended as a guide through code that has been developed to begin with raw reads and end with statistical analyses and figure generation. Note: This is not a self-sufficient repository where code can be compiled and run independently. However, I have named files such that output of step X will be consistent with the input for step Y. Paths and SLURM headers will likely need adjustment. Please contact dtnondorf@gmail.com for questions or comments.
 
 *Index*
-- Differential Gene Expression Preparation
+- Differential Gene Expression Preparation (RNAseq)
   1. Quality Control (FastQC, TrimGalore)
   2. Alignment (SubJunc)
   3. Sorting and Indexing (samtools)
   4. Read Counting (featureCounts)
+ 
+- Differential Splicing Preparation and Calculation (RNAseq)
+  1. Contrasting Variables (rMATS)
+
+- Variant Calling (WGS)
+  1. Quality Control (FastQC, TrimGalore)
+  2. Alignment (bwa-mem)
+  3. Sorting and Indexing (samtools)
+  4. Variant Calling (GATK)
+  5. Variant Filtering (GATK, bedtools, vcftools)
+  6. PopGen Statistics (vcftools)
+     - Nucleotide Diversity and Tajima's D
+
+- Statistical Analyses and Figure Generation
+  1. All analyses will be contained in annotated R files (RStudio)
 
 
 ## Differential Gene Expression Preparation
