@@ -2,6 +2,7 @@
 *Background*  
 Differential gene expression and differential gene splicing are characterized by contrasting three age groups (neonate, maturing, and adult), three tissues (liver, brain, muscle), and two sexes. Analyses include overlap between differentially expressed and differentially spliced genes, tissue-specificity of expression of age-/sex-biased genes, and population-level genetic diversity (RNAseq comes from one population while WGS for PopGen analysis come from another). This workflow is intended as a guide through code that has been developed to begin with raw reads and end with statistical analyses and figure generation. Note: This is not a self-sufficient repository where code can be compiled and run independently. However, I have named files such that output of step X will be consistent with the input for step Y. Paths and SLURM headers will likely need adjustment. Please contact dtnondorf@gmail.com for questions or comments.
 
+
 *Index*
 - Differential Gene Expression Preparation (RNAseq)
   1. Quality Control (FastQC, TrimGalore)
@@ -10,7 +11,7 @@ Differential gene expression and differential gene splicing are characterized by
   4. Read Counting (featureCounts)
  
 - Differential Splicing Preparation and Calculation (RNAseq)
-  1. Contrasting Variables (rMATS)
+  1. Splicing Contrasts (rMATS)
 
 - Variant Calling (WGS)
   1. Quality Control (FastQC, TrimGalore)
@@ -21,8 +22,8 @@ Differential gene expression and differential gene splicing are characterized by
   6. PopGen Statistics (vcftools)
      - Nucleotide Diversity and Tajima's D
 
-- Statistical Analyses and Figure Generation
-  1. All analyses will be contained in annotated R files (RStudio)
+- Differential Gene Expression Calculation, Statistics, and Figure Generation
+  1. All remaining work will be contained in annotated R files (RStudio)
 
 
 ## Differential Gene Expression Preparation
@@ -80,4 +81,21 @@ Now we can get read counts for each gene (must be reads overlapping exons). Rath
 `sbatch featureCounts.slurm`
 
 ---
+---
+
+## Differential Splicing Preparation and Calculation
+### Splicing Contrasts
+
+Using the alignments from "Alignment" in the preceding section, we create pairwise contrasts of given tissues, ages, or sexes while keeping the noncontrasting variables constant. For now, I ran these as simple one-liners; however, if you have enough contrasts, the code could be reformatted as an array job fairly simply.
+
+We need to list the input alignments in a single-line, comma-separated list file for each contrast. For example, if you wish to compare liver and brain in adult females and you have 6 replicates for each, you would have one text file:   
+&emsp; &emsp; "adult_female_Liver.txt" ("AFLiver_1.bam, AFLiver_2.bam, ..., AFLiver_6.bam")  
+and one text file:   
+&emsp; &emsp; "adult_female_Brain.txt" ("AFBrain_1.bam, AFBrain_2.bam, ..., AFBrain_6.bam")   
+
+
+Fin temp.
+
+
+
 
